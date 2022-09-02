@@ -1,0 +1,35 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.navbar{
+    width: 100%;
+    background-color: lightblue;
+}
+.navContent{
+    width: max-content;
+   
+    display: flex;
+    align-items: center;
+}
+.logo{
+    margin-left: 3rem;
+    border: 1px solid;
+    /* width: ; */
+}
+.logo>img{
+    width: 25vw;
+}
+.navItem{
+}
+ul{
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    justify-content: space-evenly;
+    border: 1px solid;
+    width: 100%;
+
+}
+/* https://www.originalbuddhas.com/blog */
