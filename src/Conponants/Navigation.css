@@ -5,31 +5,47 @@
 }
 .navbar{
     width: 100%;
-    background-color: lightblue;
+    /* background: url() no-repeat; */
+    /* background-color: rgba(0,0,0,0.2); */
+    background-size: cover;
+    /* height: 100vh; */
 }
 .navContent{
-    width: max-content;
-   
     display: flex;
     align-items: center;
+    width: 100%;
 }
 .logo{
-    margin-left: 3rem;
-    border: 1px solid;
-    /* width: ; */
+    margin-left: 2rem;
+    padding: 0.7vw;
 }
 .logo>img{
-    width: 25vw;
+    width: 15vw;
 }
 .navItem{
+    margin-left: auto;
+    width: 40%;
+    margin-right: 4rem;
 }
-ul{
+.navItem>ul{
     display: flex;
     align-items: center;
-    margin-left: auto;
-    justify-content: space-evenly;
-    border: 1px solid;
-    width: 100%;
-
+    list-style: none;
+    justify-content: space-between;
 }
+.navItem ul li{
+    cursor: pointer;
+}
+#account{
+    font-size: 1.8vw;
+}
+.active {
+    border-bottom: 2px solid rgb(9, 159, 247) !important;
+}
+#menuIcon{
+    display: none;
+}
+
+
+
 /* https://www.originalbuddhas.com/blog */

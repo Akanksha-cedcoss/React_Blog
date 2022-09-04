@@ -1,16 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./Navigation.css";
-import Box from "@mui/material/Box";
-import Tab from "@mui/material/Tab";
-import { Tabs } from "@mui/material";
+import { Badge, Tooltip } from "@mui/material";
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { Context } from "../App";
+import { NavLink, Outlet } from "react-router-dom";
+import MenuIcon from '@mui/icons-material/Menu';
 
 const Navigations = () => {
-  const [value, setValue] = React.useState("1");
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
+  let user = useContext(Context);
+
   return (
+    <>
     <div className="navbar">
       <div className="navContent">
         <div className="logo">
@@ -21,29 +23,29 @@ const Navigations = () => {
         </div>
 
         <div className="navItem">
-          <ul value={value}>
-            {/* <li>ALL BLOGS</li>
-            <li>MY BLOGS</li> */}
-
-            <Box sx={{ width: "100%" }}>
-              <Tabs
-                value={value}
-                onChange={handleChange}
-                aria-label="wrapped label tabs example"
-              >
-                <Tab
-                  value="one"
-                  label="ALL BLOGS"
-                  wrapped
-                />
-                <Tab value="two" label="MY BLOGS" />
-              </Tabs>
-            </Box>
+          <ul>
+            <NavLink exact={'true'} activeclassname={'active'} to={'/'} style={linkStyle}><li>BLOGS</li></NavLink>
+            <li>CONTACTS</li>
+            <li>ABOUT US</li>
+            <NavLink exact={'true'} activeclassname={'active'} to={'/wishlist'}  style={linkStyle} ><li>
+              <Badge badgeContent={user.wishList} color="primary">
+                <Tooltip title='wish list' arrow ><FavoriteIcon color="action" /></Tooltip>
+              </Badge>
+            </li></NavLink>
+            <NavLink to={'/account'} exact={'true'} activeclassname={'active'}  style={linkStyle} ><li><Tooltip title='Create an account' arrow><AccountCircleIcon id='account' /></Tooltip></li></NavLink>
+            <li><MenuIcon id='menuIcon' /></li>
           </ul>
         </div>
       </div>
     </div>
+    <Outlet />
+    </>
   );
 };
 
 export default Navigations;
+
+const linkStyle = {
+  color:'black',
+  textDecoration: "none"
+}
