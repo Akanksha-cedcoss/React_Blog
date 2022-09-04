@@ -49,7 +49,7 @@ const Blogs = () => {
                     <Tooltip title='like' arrow><FavoriteBorderIcon /></Tooltip>
                   )}
                 </span>
-                <Button variant="contained">Read More..</Button>
+                <Tooltip title='Click to read the blog' arrow><Button variant="contained">Read More..</Button></Tooltip>
               </div>
             </div>
           );

@@ -3,14 +3,23 @@
     padding: 0;
     box-sizing: border-box;
 }
+.blogsPage{
+    padding-top: 8vh;
+    background: url(https://www.originalbuddhas.com/images/ricepaper.jpg) no-repeat;
+    background-size: cover;
+}
 .centralDiv{
     height: 73vh;
     width: 70%;
     margin: auto;
-    margin-top: 5vh;
+    margin-top: 7vh;
+}
+.centralDiv img{
+    border-radius: 7px;
+    cursor: pointer;
 }
 .blogs{
-    padding: 3vw 5vw;
+    padding: 2vw 5vw;
     display: flex;
     flex-wrap: wrap;
 }
@@ -21,10 +30,10 @@
     margin-right: 2vw;
     margin: auto;
     width: 23vw;
-    height: 50vh;
+    height: 55vh;
     overflow: hidden;
     margin-top: 5vh;
-    /* background-color: lightpink; */
+    background-color: lightpink;
     border-radius: 7px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
     box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
@@ -32,8 +41,14 @@
 .blog img{
     height: 45%;
 }
+.blog img:hover{
+    cursor:pointer;
+    transform: scale(1.05);
+    transition: .8s ease-in-out all;
+}
 .content{
     padding: 1vw 2vw;
+    text-align: justify;
 }
 .content h3{
     margin-bottom: 2vh;
