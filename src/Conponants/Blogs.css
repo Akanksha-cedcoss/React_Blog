@@ -5,8 +5,9 @@
 }
 .blogsPage{
     padding-top: 8vh;
-    background: url(https://www.originalbuddhas.com/images/ricepaper.jpg) no-repeat;
+    /* background: url(https://www.originalbuddhas.com/images/ricepaper.jpg) no-repeat; */
     background-size: cover;
+    background-color: #ddd;
 }
 .centralDiv{
     height: 73vh;
@@ -17,6 +18,10 @@
 .centralDiv img{
     border-radius: 7px;
     cursor: pointer;
+}
+.centralDiv img:hover{
+    transform: scale(1.05);
+    transition: .8s ease-in-out all;
 }
 .blogs{
     padding: 2vw 5vw;
@@ -33,7 +38,7 @@
     height: 55vh;
     overflow: hidden;
     margin-top: 5vh;
-    background-color: lightpink;
+    background-color: white;
     border-radius: 7px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
     box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
@@ -48,29 +53,42 @@
 }
 .content{
     padding: 1vw 2vw;
+    height: 40%;
     text-align: justify;
 }
 .content h3{
     margin-bottom: 2vh;
 }
 .bottomBlog{
-    margin-top: 4vh;
-    padding: 1vw;
+    padding: 2.2vw 1vw;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    height: 12%;
 }
 #like{
-    color: red;
+    color: crimson;
 }
 .likeBlog{
     margin-left: 1vw;
     cursor: pointer;
 }
 .bottomBlog Button{
-    background-color: tomato;
+    background-color: #ffdb0d;
+    color: black;
     cursor: pointer;
 }
 .bottomBlog Button:hover{
     background-color: rgba(239, 100, 76, 0.897);
+}
+.createBlog{
+    width: fit-content;
+    position: fixed;
+    bottom: 3%;
+    right: 1%;
+}
+.createSpan{
+    background-color: #ffdb0d;
+    padding: 2vh 1vw ;
+    border-radius: 100%;
 }

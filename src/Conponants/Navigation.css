@@ -12,6 +12,7 @@
     padding: 0.5vh 0;
     position: fixed;
     z-index: 1;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px -50px 36px -28px inset;
 }
 .navContent{
     display: flex;
@@ -48,7 +49,44 @@
 #menuIcon{
     display: none;
 }
-
+.signUpform{
+    border: none;
+    outline: none;
+    padding: 1vw;
+    width: 100%;
+    border-bottom: 1px solid #ddd;
+}
+#submitBtn{
+    color: white;
+    background-color: black;
+    width: 100%;
+    margin-top: 5vh;
+}
+.sideLine{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #ccc;
+    margin-top: 3vh;
+}
+.sideLine::before,
+.sideLine::after{
+    content: '';
+    border-top: 1px solid #b4b4b4;
+    margin: 0 20px 0 0;
+    flex: 1 0 20px;
+}
+.sideLine::after{
+    margin: 0 0 0 20px;
+}
+#fbBtn{
+    color: white;
+    background-color: dodgerblue;
+    width: 100%;
+    margin-top: 3vh;
+}
 
 
 /* https://www.originalbuddhas.com/blog */

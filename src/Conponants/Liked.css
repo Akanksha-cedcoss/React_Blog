@@ -1,0 +1,61 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.likedSection{
+    
+    /* background: url(https://media.istockphoto.com/photos/top-view-of-modern-office-workspace-picture-id1205613046?b=1&k=20&m=1205613046&s=170667a&w=0&h=gijbHEL3cHTaD6YtfO_pCFLOuBX-2lshhWP4fz4mUck=) no-repeat; */
+    background-size: cover;
+    min-height: 100vh;
+    max-height: max-content;
+    padding: 10vh 4vw;
+}
+.likedBlog{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-right: 2vw;
+    margin: auto;
+    width: 23vw;
+    height: 55vh;
+    margin-top: 5vh;
+    background-color: lightgreen;
+    border-radius: 7px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+}
+.likedBlogs{
+    display: flex;
+    flex-wrap: wrap;
+}
+#likedBlog-img{
+    height: 50%;
+    border-radius: 7px 7px 0 0;
+}
+#likedBlog-img:hover{
+    cursor:pointer;
+    transform: scale(1.05);
+    transition: .8s ease-in-out all;
+}
+.likedcontent{
+    padding: 1vw 2vw;
+    height: 40%;
+    text-align: justify;
+}
+.likedcontent h3{
+    margin-bottom: 2vh;
+}
+.likedBottomBlog{
+    padding: 2.2vw 1vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.likedBottomBlog Button{
+    background-color: tomato;
+    cursor: pointer;
+}
+.likedBottomBlog Button:hover{
+    background-color: rgba(239, 100, 76, 0.897);
+}
