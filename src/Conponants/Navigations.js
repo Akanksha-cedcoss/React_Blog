@@ -1,25 +1,36 @@
 import React, { useContext, useState } from "react";
 import "./Navigation.css";
 import {
+  Alert,
   Badge,
   Button,
+  Drawer,
   Modal,
+  Snackbar,
   Tooltip,
   Typography,
 } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { Context } from "../App";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
 import { Box } from "@mui/system";
-import user from '../User.json';
+import userData from "../User.json";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 const Navigations = () => {
   let user = useContext(Context);
+  let navigate = useNavigate();
   const [open, setOpen] = React.useState(false); //Sign Up State
   const [open2, setOpen2] = useState(false); // Log In State
+  // SnackBar State
+  const [openSnack, setSnack] = useState({
+    open: false,
+    html: "",
+    severity: "info",
+  });
 
   //Functions for SignUp form Modal
   const handleOpen = () => setOpen(true);
@@ -29,11 +40,62 @@ const Navigations = () => {
   const handleOpen2 = () => setOpen2(true);
   const handleClose2 = () => setOpen2(false);
 
-
+  //function for submit of LOGIN forms
   const submitLogin = () => {
-    let mail = document.getElementById('email').value;
-    let pswd = document.getElementById('password').value;
-  }
+    let mail = document.getElementById("email").value;
+    let pswd = document.getElementById("password").value;
+    if (mail === userData[0].email && pswd === userData[0].password) {
+      handleClose2();
+      document.getElementById("signUpLoginBtn").style.display = "none";
+      document.getElementById("user").innerHTML = userData[0].name;
+      document.getElementById("username").style.display = "block";
+      document.getElementById("logoutBtn").style.display = "block";
+      user.setLogin(true);
+      setSnack({
+        open: true,
+        html: "Sucessfully Logged In",
+        severity: "success",
+      });
+    } else if (mail === "" && pswd === "") {
+      setSnack({
+        open: true,
+        html: "Please Enter your email and password",
+        severity: "error",
+      });
+      user.setLogin(false);
+    } else {
+      setSnack({
+        open: true,
+        html: "Wrong Credentials, Please enter again!",
+        severity: "error",
+      });
+      document.getElementById("email").value = "";
+      document.getElementById("password").value = "";
+      user.setLogin(false);
+    }
+  };
+
+  //Function for LogOut
+  const logout = () => {
+    document.getElementById("signUpLoginBtn").style = {
+      display: "flex",
+      width: "8vw",
+      justifyContent: "space-between",
+    };
+
+    document.getElementById("user").innerHTML = "";
+    document.getElementById("username").style.display = "none";
+    document.getElementById("logoutBtn").style.display = "none";
+    user.setLogin(true);
+    setSnack({
+      open: true,
+      html: "Logged Out!",
+      severity: "info",
+    });
+    user.setLogin(false);
+    navigate("/");
+  };
+
   return (
     <>
       <div className="navbar">
@@ -47,43 +109,77 @@ const Navigations = () => {
 
           <div className="navItem">
             <ul>
-              <NavLink
-                exact={"true"}
-                activeclassname={"active"}
-                to={"/"}
-                style={linkStyle}
-              >
-                <li>BLOGS</li>
-              </NavLink>
-              <li>CONTACTS</li>
-              <li>ABOUT US</li>
-              <NavLink
-                exact={"true"}
-                activeclassname={"active"}
-                to={"/wishlist"}
-                style={linkStyle}
-              >
-                <li>
-                  <Badge badgeContent={user.wishList} color="primary">
-                    <Tooltip title="Liked Blogs" arrow>
-                      <FavoriteIcon color="action" />
+              <span className="list">
+                <NavLink
+                  exact={"true"}
+                  activeclassname={"active"}
+                  to={"/"}
+                  style={linkStyle}
+                >
+                  <li>BLOGS</li>
+                </NavLink>
+                <NavLink
+                  exact={"true"}
+                  activeclassname={"active"}
+                  to={"/contact"}
+                  style={linkStyle}
+                >
+                  <li>CONTACTS</li>
+                </NavLink>
+                <NavLink
+                  exact={"true"}
+                  activeclassname={"active"}
+                  to={"/about"}
+                  style={linkStyle}
+                >
+                  <li>ABOUT US</li>
+                </NavLink>
+                <NavLink
+                  exact={"true"}
+                  activeclassname={"active"}
+                  to={"/wishlist"}
+                  style={linkStyle}
+                >
+                  <li>
+                    <Badge badgeContent={user.wishList} color="primary">
+                      <Tooltip title="Liked Blogs" arrow>
+                        <FavoriteIcon color="action" />
+                      </Tooltip>
+                    </Badge>
+                  </li>
+                </NavLink>
+                <span id="signUpLoginBtn">
+                  <li>
+                    <Tooltip title="create account">
+                      <PersonAddAltIcon onClick={handleOpen} />
                     </Tooltip>
-                  </Badge>
-                </li>
-              </NavLink>
-              <Tooltip title="create account">
+                  </li>
+                  <li>
+                    <Tooltip title="Log In" arrow>
+                      <AccountCircleIcon id="account" onClick={handleOpen2} />
+                    </Tooltip>
+                  </li>
+                </span>
+                <span id="username">
+                  <span id="user"></span>
+                </span>
+
+                <span id="logoutBtn">
+                  <Tooltip title="Logout" arrow>
+                    <LogoutIcon onClick={logout} />
+                  </Tooltip>
+                </span>
+              </span>
+              <span id="hamburgerMenu">
                 <li>
-                  <PersonAddAltIcon onClick={handleOpen} />
+                  <MenuIcon
+                    id="menuIcon"
+                    onClick={() => {
+                      user.setMenuDrawer(true);
+                    }}
+                  />
                 </li>
-              </Tooltip>
-              <li>
-                <Tooltip title="Log In" arrow>
-                  <AccountCircleIcon id="account" onClick={handleOpen2} />
-                </Tooltip>
-              </li>
-              <li>
-                <MenuIcon id="menuIcon" />
-              </li>
+              </span>
             </ul>
           </div>
         </div>
@@ -106,6 +202,8 @@ const Navigations = () => {
                 type={"text"}
                 placeholder="Full Name"
                 className="signUpform"
+                autoComplete="yes"
+                autoFocus
               />
             </Typography>
             <Typography id="modal-modal-description" sx={{ mt: 2 }}>
@@ -154,9 +252,17 @@ const Navigations = () => {
                 Login with FaceBook
               </Button>
             </Typography>
-            <Typography sx={{display:'flex', flexDirection:'column', mt:'2vh', color:'#5d5d5d', fontSize:'small'}}>
-          <em>**Sample Sign Up Page**</em>
-          </Typography>
+            <Typography
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                mt: "2vh",
+                color: "#5d5d5d",
+                fontSize: "small",
+              }}
+            >
+              <em>**Sample Sign Up Page**</em>
+            </Typography>
           </Box>
         </Modal>
       </div>
@@ -174,7 +280,14 @@ const Navigations = () => {
             Log In
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            <input type={"email"} placeholder="E-mail" className="signUpform" id="email" />
+            <input
+              type={"email"}
+              placeholder="E-mail"
+              className="signUpform"
+              id="email"
+              autoFocus
+              autoComplete="yes"
+            />
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             <input
@@ -185,16 +298,117 @@ const Navigations = () => {
             />
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            <Button variant="contained" id="submitLogin" onClick={{submitLogin}}>
+            <Button variant="contained" id="submitLogin" onClick={submitLogin}>
               Submit
             </Button>
           </Typography>
-          <Typography sx={{display:'flex', flexDirection:'column', mt:'2vh', color:'#5d5d5d', fontSize:'small'}}>
-          <em>**Sample User Id: user451@gmail.com**</em>
-          <em>**Sample Password: 125451**</em>
+          <Typography
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              mt: "2vh",
+              color: "#5d5d5d",
+              fontSize: "small",
+            }}
+          >
+            <em>**Sample User Id: user451@gmail.com**</em>
+            <em>**Sample Password: 125451**</em>
           </Typography>
         </Box>
       </Modal>
+
+      <Snackbar
+        open={openSnack.open}
+        autoHideDuration={3000}
+        onClose={() => {
+          setSnack({ open: false, html: "", severity: "info" });
+        }}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      >
+        <Alert
+          severity={openSnack.severity}
+          variant="filled"
+          onClose={() => {
+            setSnack({ open: false, html: "", severity: "info" });
+          }}
+        >
+          {openSnack.html}
+        </Alert>
+      </Snackbar>
+
+      <div>
+        {/* Drawer */}
+        <Drawer
+          id="drawer"
+          open={user.menuDrawer}
+          onClose={() => {
+            user.setMenuDrawer(false);
+          }}
+          anchor="top"
+          PaperProps={{
+            sx: {
+              width: "70%",
+              height: "50%",
+              margin: "auto",
+              padding: "4vw 6vw",
+              borderRadius: "0 0 7px 7px",
+            },
+          }}
+        >
+          <NavLink
+            exact={"true"}
+            activeclassname={"active"}
+            to={"/"}
+            style={linkStyle2}
+          >
+            BLOGS
+          </NavLink>
+
+          <NavLink
+            exact={"true"}
+            activeclassname={"active"}
+            to={"/contact"}
+            style={linkStyle2}
+          >
+            CONTACTS
+          </NavLink>
+
+          <NavLink
+            exact={"true"}
+            activeclassname={"active"}
+            to={"/about"}
+            style={linkStyle2}
+          >
+            ABOUT US
+          </NavLink>
+
+          <NavLink
+            exact={"true"}
+            activeclassname={"active"}
+            to={"/wishlist"}
+            style={linkStyle2}
+          >
+            <Badge badgeContent={user.wishList} color="primary">
+              <FavoriteIcon color="action" />
+            </Badge>
+          </NavLink>
+          <span
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              textAlign: "center",
+              margin: "auto",
+            }}
+          >
+            <PersonAddAltIcon onClick={handleOpen} sx={{ fontSize: "10vw" }} />
+
+            <AccountCircleIcon
+              onClick={handleOpen2}
+              sx={{ fontSize: "10vw" }}
+            />
+          </span>
+        </Drawer>
+      </div>
       <Outlet />
     </>
   );
@@ -206,6 +420,13 @@ const linkStyle = {
   color: "black",
   textDecoration: "none",
 };
+const linkStyle2 = {
+  color: "black",
+  textDecoration: "none",
+  textAlign: "center",
+  margin: "auto",
+};
+
 // SignUp Form Modal Style CSS
 const style = {
   position: "absolute",

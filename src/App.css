@@ -1,3 +1,10 @@
 :root{
     
 }
+body{
+    background-color: #ddd;
+    background-size: cover;
+}
+::-webkit-scrollbar {
+    display: none;
+  }

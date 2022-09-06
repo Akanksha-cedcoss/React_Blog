@@ -46,8 +46,9 @@
 .active {
     border-bottom: 2px solid rgb(9, 159, 247) !important;
 }
-#menuIcon{
+#hamburgerMenu{
     display: none;
+    margin-left: auto;
 }
 .signUpform{
     border: none;
@@ -87,6 +88,32 @@
     width: 100%;
     margin-top: 3vh;
 }
+#username, #logoutBtn{
+    display: none;
+}
+#signUpLoginBtn{
+    display: flex;
+    width: 8vw;
+    justify-content: space-between;
+}
+.list{
+    display: flex;
+    justify-content: space-between;
+    width: 40vw;
+}
+@media screen and (max-width: 1000px) {
+    .logo>img{
+        width: 30vw;
+    }
+}
+@media screen and (max-width: 820px) {
+    .list{
+        display: none;
+    }
+    #hamburgerMenu{
+        display: block;
+    }
 
+}
 
 /* https://www.originalbuddhas.com/blog */
